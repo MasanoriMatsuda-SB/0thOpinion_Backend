@@ -4,12 +4,14 @@
 # 起動前にやること
 ・backendフォルダ内に.envファイルを作成
   .envの中身
-  # シークレットキー
+  シークレットキー
   SECRET_KEY=自由に設定（適当でいい）
   JWT_SECRET_KEY=自由に設定（適当でいい）
-  # OpenAI APIキー
+  
+  OpenAI APIキー
   OPENAI_API_KEY=自分のAPIキー
-  # データベース接続情報
+  
+  データベース接続情報
   DATABASE_USER=root
   DATABASE_PASSWORD=設定したパスワード
   DATABASE_HOST=localhost
