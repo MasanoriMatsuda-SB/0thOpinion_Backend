@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from extensions import db  # 修正箇所
 from models.pet import Pet
 from models.disease import Disease  # 必要に応じてインポート
