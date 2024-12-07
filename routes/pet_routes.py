@@ -26,3 +26,22 @@ def add_pet():
     db.session.add(new_pet)
     db.session.commit()
     return jsonify({'message': 'ペットの登録が完了しました。'}), 201
+
+@pet_bp.route('/', methods=['GET'])
+@jwt_required()
+def get_pets():
+    try:
+        user_id = get_jwt_identity()
+        pets = Pet.query.filter_by(User_id=user_id).all()
+        pet_list = [{
+            'Pet_id': pet.Pet_id,
+            'Pet_name': pet.Pet_name,
+            'Gender': pet.Gender,
+            'Birth_date': pet.Birth_date,
+            'Neuter_Spay': pet.Neuter_Spay,
+            'disease_id': pet.disease_id
+        } for pet in pets]
+        return jsonify({'pets': pet_list}), 200
+    except Exception as e:
+        current_app.logger.error(f"ペット一覧取得エラー: {e}")
+        return jsonify({'message': 'サーバーエラーが発生しました。'}), 500
