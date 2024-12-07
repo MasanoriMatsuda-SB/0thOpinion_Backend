@@ -48,6 +48,6 @@ def login():
     user = User.query.filter_by(Email=email).first()
     if user and user.check_password(password):
         access_token = create_access_token(identity=str(user.User_id))
-        return jsonify({'access_token': access_token}), 200
+        return jsonify({'access_token': access_token, "screen_name": user.Screen_name}), 200
     else:
         return jsonify({'message': 'ログインに失敗しました。'}), 401
