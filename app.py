@@ -11,7 +11,7 @@ def create_app():
     jwt.init_app(app)
 
     # CORSの設定を追加
-    CORS(app, resources={r"/api/*": {"origins": "https://tech0-gen-8-step3-app-node-9.azurewebsites.net"}})
+    CORS(app, resources={r"/api/*": {"origins": ["https://tech0-gen-8-step3-app-node-9.azurewebsites.net", "http://localhost:3000"]}})
 
     # モデルをインポート
     with app.app_context():
