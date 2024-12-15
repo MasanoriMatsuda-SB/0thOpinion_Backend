@@ -45,3 +45,19 @@ def get_pets():
     except Exception as e:
         current_app.logger.error(f"ペット一覧取得エラー: {e}")
         return jsonify({'message': 'サーバーエラーが発生しました。'}), 500
+
+# DELETE /api/pets/<int:pet_id> - 特定のペットを削除
+@pet_bp.route('/<int:pet_id>', methods=['DELETE'])
+@jwt_required()
+def delete_pet(pet_id):
+    try:
+        user_id = get_jwt_identity()
+        pet = Pet.query.get_or_404(pet_id)
+
+        db.session.delete(pet)
+        db.session.commit()
+        return jsonify({'message': 'ペットが削除されました。'}), 200
+    except Exception as e:
+        current_app.logger.error(f"ペット削除エラー: {e}")
+        db.session.rollback()
+        return jsonify({'message': 'サーバーエラーが発生しました。'}), 500

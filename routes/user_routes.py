@@ -6,6 +6,19 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 
 user_bp = Blueprint('user_bp', __name__)
 
+@user_bp.route('/me', methods=['GET'])
+@jwt_required()
+def get_me():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if user:
+        return jsonify({
+            'email': user.email,
+            'screen_name': user.screen_name
+        }), 200
+    else:
+        return jsonify({'message': 'ユーザーが見つかりません。'}), 404
+
 @user_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
