@@ -13,7 +13,7 @@ def get_me():
     user = User.query.get(user_id)
     if user:
         return jsonify({
-            'email': user.email,
+            'email': user.Email,
             'screen_name': user.screen_name
         }), 200
     else:

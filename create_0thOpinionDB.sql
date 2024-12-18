@@ -1,4 +1,4 @@
--- Active: 1732756335965@@localhost@3306@0thopiniondb
+-- Active: 1733992135383@@tech0-gen-8-step3-rdb-9.mysql.database.azure.com@3306@0thopiniondb
 -- データベースを作成
 CREATE DATABASE IF NOT EXISTS 0thOpinionDB;
 
@@ -109,3 +109,5 @@ CREATE TABLE PetAnimal (
     FOREIGN KEY (Pet_id) REFERENCES Pet(Pet_id),
     FOREIGN KEY (Animal_id) REFERENCES Animal(Animal_id)
 );
+
+ALTER TABLE `Pet` MODIFY `Image` MEDIUMBLOB;
